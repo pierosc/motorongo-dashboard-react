@@ -13,14 +13,20 @@ function SelectClient({ setValue }) {
       <label className="text-3xl font-extrabold pt-8">Nuevo Viaje</label>
       <div className="flex flex-col gap-2">
         <SelectFilter style="big" />
-        <Button text="Agregar Nuevo Cliente" design={"text"} />
+        <Button
+          text="Agregar Nuevo Cliente"
+          design={"text"}
+          onClick={() => {
+            setValue(1);
+          }}
+        />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <Button
           text="Continuar"
           design={"success"}
           onClick={() => {
-            setValue(1);
+            setValue(2);
           }}
         />
       </div>

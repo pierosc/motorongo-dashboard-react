@@ -7,6 +7,8 @@ import SwipeableViews from "react-swipeable-views-react-18-fix";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import { ModalBoxStyle } from "../../../Utils/constants";
+import CalculatePrice from "./CalculatePrice";
+import CreateTrip from "./CreateTrip";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,12 +57,12 @@ function NewTripModalController() {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <NewClient setValue={setValue} />
         </TabPanel>
-        {/* <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
-          </TabPanel>
-          <TabPanel value={value} index={3} dir={theme.direction}>
-            Item Three
-          </TabPanel> */}
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          <CalculatePrice setValue={setValue} />
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          <CreateTrip setValue={setValue} />
+        </TabPanel>
       </SwipeableViews>
     </Box>
   );

@@ -3,6 +3,7 @@ import React from "react";
 import SelectClient from "./Modals/SelectClient";
 import Modal from "@mui/material/Modal";
 import NewTripModalController from "./Modals/NewTripModalController";
+import { NewTripProvider } from "./NewTripContext";
 
 function NewTrip() {
   const [open, setOpen] = React.useState(false);
@@ -10,7 +11,7 @@ function NewTrip() {
   const handleClose = () => setOpen(false);
 
   return (
-    <>
+    <NewTripProvider>
       <div className="flex justify-between mb-8">
         <label>VIAJA EN MOTOCAR</label>
         <Button text="Nuevo viaje" design={"success"} onClick={handleOpen} />
@@ -20,7 +21,7 @@ function NewTrip() {
           <NewTripModalController />
         </>
       </Modal>
-    </>
+    </NewTripProvider>
   );
 }
 
