@@ -1,0 +1,45 @@
+.button_text {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    letter-spacing: 0.01em;
+}
+
+.button_color {
+    /* background-color:#308E21 ; */
+    background-color:blue ;
+
+}
+.button_color:hover {
+    /* background-color: #27751B ; */
+    background-color: blue ;
+
+}
+
+.button_modal_yellow_color {
+    background-color:#86971E ;
+    
+}
+.button_modal_yellow_color:hover {
+    background-color: #6B7917 ;
+}
+
+.button_modal_red_color {
+    background-color:#525252 ;
+    
+}
+.button_modal_red_color:hover {
+    background-color: #292929 ;
+}
+.button_disabled { 
+    background-color: #D7D7D7;
+    color:#A4A4A4;  
+}
+.button_error_color {
+    background-color:#D01717 ;
+    
+}
+.button_error_color:hover {
+    background-color: #B21515 ;
+}
