@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { ModalBoxStyle } from "../../../Utils/constants";
 import SelectFilter from "../../../Components/SelectFilter/SelectFilter";
@@ -32,7 +32,9 @@ function CalculatePrice({ setValue }) {
     &
     radius=8000
     &&
-  key=${process.env.REACT_APP_GOOGLE_KEY}&input=${originPoint}`,
+    key=${process.env.REACT_APP_GOOGLE_KEY}
+    &
+    input=${originPoint}`,
     setOriginAutoComplete
   );
 
@@ -54,6 +56,7 @@ function CalculatePrice({ setValue }) {
           onChange={(e) => {
             setOriginPoint(e.target.value);
             setIsPriceCalculated(false);
+            getOriginAutoComplete;
           }}
           validationType="alphabetic"
         />
