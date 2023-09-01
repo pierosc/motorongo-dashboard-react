@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const useGettRequest = (
@@ -12,7 +12,7 @@ const useGettRequest = (
   setLoading = () => {}
 ) => {
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const fetchData = async (secondBody) => {
     setIsLoading(true);
     setLoading(true);
@@ -104,7 +104,7 @@ const useGettRequest = (
         if (error.response.status == 403) {
           sessionStorage.clear();
           toast.error("Token vencido", { theme: "dark" });
-          navigate("/login");
+          // navigate("/login");
         }
       });
   };
@@ -130,7 +130,7 @@ const useGettRequest = (
         console.log(error);
         sessionStorage.clear();
         toast.error("Token vencido", { theme: "dark" });
-        navigate("/login");
+        // navigate("/login");
       })
       .then(function (response) {
         getUser.REFRESH_TOKEN = response.data.REFRESH_TOKEN;

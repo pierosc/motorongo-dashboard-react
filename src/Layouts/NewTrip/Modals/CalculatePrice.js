@@ -56,7 +56,7 @@ function CalculatePrice({ setValue }) {
           onChange={(e) => {
             setOriginPoint(e.target.value);
             setIsPriceCalculated(false);
-            getOriginAutoComplete;
+            getOriginAutoComplete();
           }}
           validationType="alphabetic"
         />
