@@ -22,7 +22,6 @@ function CalculatePrice({ setValue }) {
   //calcular distancia
   //'https://maps.googleapis.com/maps/api/distancematrix/json?units=meters&destinations=${fields['origin_lat'].toString()}%2C${fields['origin_lon'].toString()}&origins=${fields['destination_lat'].toString()}%2C${fields['destination_lon'].toString()}&key=$googleMapsKey';
 
-  // key = 'AIzaSyC0eFJNXRe00J6s-ChBKhi4ZrrWHOAUBMk';
   // `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:pe&location=-8.393103545126111%2C-74.5832693901913&radius=8000&&
   // key=${process.env.REACT_APP_GOOGLE_KEY}&input=${originPoint}`;
 
