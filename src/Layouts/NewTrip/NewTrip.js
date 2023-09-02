@@ -12,7 +12,7 @@ function NewTrip() {
 
   return (
     <NewTripProvider>
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between my-8">
         <label>VIAJA EN MOTOCAR</label>
         <Button text="Nuevo viaje" design={"success"} onClick={handleOpen} />
       </div>

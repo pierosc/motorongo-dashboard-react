@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import { ModalBoxStyle } from "../../../Utils/constants";
 import SelectFilter from "../../../Components/SelectFilter/SelectFilter";
 import Button from "../../../Components/Button/Button";
+import NewTripContext from "../NewTripContext";
+import usePostRequest from "../../../Hooks/usePostRequest";
+import debounce from "lodash.debounce";
 
 function SelectClient({ setValue }) {
+  const { clientList, setClientList, client, setClient } =
+    useContext(NewTripContext);
+
+  const [GetCustomer] = usePostRequest(
+    `${process.env.REACT_APP_URL + "back-office/customer/list"}`,
+    setClientList
+  );
+
+  const GetCustomerDebounce = debounce((nombre) => {
+    GetCustomer({
+      search_query: nombre,
+    });
+  }, 200);
+
   return (
     <div
       className="flex flex-col justify-between p-4"
@@ -12,7 +29,20 @@ function SelectClient({ setValue }) {
     >
       <label className="text-3xl font-extrabold pt-8">Nuevo Viaje</label>
       <div className="flex flex-col gap-2">
-        <SelectFilter style="big" />
+        {/* <SelectFilter style="big" /> */}
+        <SelectFilter
+          label="Pasajero"
+          style="big"
+          data={clientList?.fields}
+          mapKey={"identity_document"}
+          option={"first_name"}
+          setSelected={setClient}
+          selected={client}
+          // onChange={cambio}
+          onInputChange={(v) => {
+            GetCustomerDebounce(v);
+          }}
+        />
         <Button
           text="Agregar Nuevo Cliente"
           design={"text"}

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { ModalBoxStyle } from "../../../Utils/constants";
 import SelectFilter from "../../../Components/SelectFilter/SelectFilter";
 import Button from "../../../Components/Button/Button";
 import Input from "./../../../Components/Input/Input";
 import NewTripContext from "../NewTripContext";
+import useGettRequest from "../../../Hooks/useGetRequest";
 
 function CalculatePrice({ setValue }) {
   const {
@@ -17,6 +18,23 @@ function CalculatePrice({ setValue }) {
   } = useContext(NewTripContext);
 
   const [isPriceCalculated, setIsPriceCalculated] = useState(false);
+  const [originAutoComplete, setOriginAutoComplete] = useState([]);
+
+  const [getOriginAutoComplete] = useGettRequest(
+    `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:pe&
+    location=-8.393103545126111%2C-74.5832693901913
+    &
+    radius=8000
+    &&
+    key=asdfasdfsadfsadfsdafsafsadfsdf
+    &
+    input=${originPoint}`,
+    setOriginAutoComplete
+  );
+
+  useEffect(() => {
+    console.log(originAutoComplete);
+  }, [originAutoComplete]);
 
   return (
     <div
@@ -32,6 +50,7 @@ function CalculatePrice({ setValue }) {
           onChange={(e) => {
             setOriginPoint(e.target.value);
             setIsPriceCalculated(false);
+            // getOriginAutoComplete();
           }}
           validationType="alphabetic"
         />

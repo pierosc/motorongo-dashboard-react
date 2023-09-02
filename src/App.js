@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <div className="flex justify-center">
-        <div style={{ width: "70vw" }}>
+        <div style={{ width: "700px", maxWidth: "90vw" }}>
           <TripsView />
         </div>
       </div>

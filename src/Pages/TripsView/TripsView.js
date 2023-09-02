@@ -5,11 +5,12 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import PropTypes from "prop-types";
 // import TabPanel from "@mui/lab/TabPanel";
-import TripList from "../../Layouts/TripList/TripList";
+// import TripList from "../../Layouts/AsignedTrips/AsignedTrips";
 import NewTrip from "../../Layouts/NewTrip/NewTrip";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
+import AsignedTrips from "../../Layouts/AsignedTrips/AsignedTrips";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +57,7 @@ function TripsView() {
     setValue(index);
   };
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
+    <Box sx={{ typography: "body1" }}>
       <NewTrip />
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -73,7 +74,7 @@ function TripsView() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <TripList />
+            <AsignedTrips />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
             Item Two
