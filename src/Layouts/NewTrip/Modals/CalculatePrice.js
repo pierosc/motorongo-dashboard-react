@@ -19,11 +19,6 @@ function CalculatePrice({ setValue }) {
 
   const [isPriceCalculated, setIsPriceCalculated] = useState(false);
   const [originAutoComplete, setOriginAutoComplete] = useState([]);
-  //calcular distancia
-  //'https://maps.googleapis.com/maps/api/distancematrix/json?units=meters&destinations=${fields['origin_lat'].toString()}%2C${fields['origin_lon'].toString()}&origins=${fields['destination_lat'].toString()}%2C${fields['destination_lon'].toString()}&key=$googleMapsKey';
-
-  // `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:pe&location=-8.393103545126111%2C-74.5832693901913&radius=8000&&
-  // key=${process.env.REACT_APP_GOOGLE_KEY}&input=${originPoint}`;
 
   const [getOriginAutoComplete] = useGettRequest(
     `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:pe&
@@ -31,7 +26,7 @@ function CalculatePrice({ setValue }) {
     &
     radius=8000
     &&
-    key=${process.env.REACT_APP_GOOGLE_KEY}
+    key=asdfasdfsadfsadfsdafsafsadfsdf
     &
     input=${originPoint}`,
     setOriginAutoComplete
@@ -55,7 +50,7 @@ function CalculatePrice({ setValue }) {
           onChange={(e) => {
             setOriginPoint(e.target.value);
             setIsPriceCalculated(false);
-            getOriginAutoComplete();
+            // getOriginAutoComplete();
           }}
           validationType="alphabetic"
         />
