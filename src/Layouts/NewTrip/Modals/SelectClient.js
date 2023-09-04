@@ -12,7 +12,7 @@ function SelectClient({ setValue }) {
     useContext(NewTripContext);
 
   const [GetCustomer] = usePostRequest(
-    `${process.env.REACT_APP_URL + "back-office/customer/list"}`,
+    `${process.env.REACT_APP_TERA_URL + "back-office/customer/list"}`,
     setClientList
   );
 
@@ -33,7 +33,7 @@ function SelectClient({ setValue }) {
         <SelectFilter
           label="Pasajero"
           style="big"
-          data={clientList?.fields}
+          data={clientList?.map((driver) => driver.fields)}
           mapKey={"identity_document"}
           option={"first_name"}
           setSelected={setClient}

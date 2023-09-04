@@ -1,6 +1,7 @@
 // import TripDisplay from "@/app/Components/TripDisplay/TripDisplay";
 import React, { useState, useEffect } from "react";
 import TripDisplay from "../../Components/TripDisplay/TripDisplay";
+import useGettRequest from "../../Hooks/useGetRequest";
 import usePostRequest from "../../Hooks/usePostRequest";
 
 function AsignedTrips() {
@@ -20,10 +21,9 @@ function AsignedTrips() {
     { driver_state: true }
   );
 
-  const [getTripStateList] = usePostRequest(
+  const [getTripStateList] = useGettRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip-state/list"}`,
-    setTripStateList,
-    { driver_state: true }
+    setTripStateList
   );
 
   useEffect(() => {
@@ -33,15 +33,15 @@ function AsignedTrips() {
   }, []);
 
   return (
-    <>
-      {tripList.map((trip) => (
+    <div style={{ height: "70vh", overflow: "auto" }}>
+      {tripList.map((trip, index) => (
         <TripDisplay
           trip={trip?.fields}
-          driversList={driversList}
+          driversList={driversList?.map((driver) => driver.fields)}
           tripStateList={tripStateList}
         />
       ))}
-    </>
+    </div>
   );
 }
 

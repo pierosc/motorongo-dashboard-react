@@ -92,7 +92,7 @@ function SelectFilter({
   };
 
   useEffect(() => {
-    console.log(selected);
+    // console.log(selected);
     handleOnSelectedChange();
   }, [selected]);
 

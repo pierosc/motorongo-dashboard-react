@@ -5,12 +5,32 @@ import Button from "../Button/Button";
 import usePostRequest from "../../Hooks/usePostRequest";
 
 function TripDisplay({ trip, driversList, tripStateList }) {
+  const [driver, setDriver] = useState({});
+  const [tripState, setTripState] = useState({});
+
   return (
     <Paper elevation={3}>
-      <div className="grid grid-cols-4 m-4 gap-2 p-4">
+      <div className="grid grid-cols-4 m-4 gap-6 p-4 items-center">
         <PlaceInfo trip={trip} />
-        <SelectFilter />
-        <SelectFilter />
+        <SelectFilter
+          data={tripStateList}
+          label={"Estado de viaje"}
+          style={"big"}
+          option={"trip_state_name"}
+          mapKey={"id"}
+          selected={tripState}
+          setSelected={setTripState}
+        />
+        {/* //Elegir conductor */}
+        <SelectFilter
+          data={driversList}
+          label={"Elegir conductor"}
+          style={"big"}
+          option={"first_name"}
+          mapKey={"pk"}
+          selected={driver}
+          setSelected={setDriver}
+        />
         <Button
           text="Guardar Cambios"
           design={"success"}
@@ -27,24 +47,32 @@ function PlaceInfo({ trip }) {
   const [customer, setCustomer] = useState({});
 
   const [getCustomerData] = usePostRequest(
-    `${process.env.REACT_APP_TERA_URL + "api/customer/customer-data"}`,
+    `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,
     setCustomer,
-    { firebase_UUID: "gzNyBIfYthOnLkrKgyYc9xnz9Ok1" }
+    { customer_uuid: trip?.customer }
   );
 
   useEffect(() => {
     getCustomerData();
   }, []);
 
+  const customerName = customer?.first_name + " " + customer?.last_name;
+  const destination =
+    trip.destination_address.split(",")[0] +
+    trip.destination_address.split(",")[1] +
+    "/" +
+    trip.destination_ref;
+  const origin =
+    trip.origin_address.split(",")[0] +
+    trip.origin_address.split(",")[1] +
+    "/" +
+    trip.origin_ref;
+
   return (
     <div className="grid ">
-      <div className="font-bold">Nombre Completo</div>
-      <div className="">
-        {trip.destination_address} / {trip.destination_ref}
-      </div>
-      <div className="">
-        {trip.destination_address} / {trip.destination_ref}
-      </div>
+      <div className="font-bold">{customerName}</div>
+      <div className="text-xs mb-2">{destination}</div>
+      <div className="text-xs">{origin}</div>
     </div>
   );
 }

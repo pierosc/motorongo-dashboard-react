@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
-import Box from "@mui/material/Box";
-import { ModalBoxStyle } from "../../../Utils/constants";
+import React, { useState, useContext, useEffect, useRef } from "react";
+// import Box from "@mui/material/Box";
+// import { ModalBoxStyle } from "../../../Utils/constants";
 import SelectFilter from "../../../Components/SelectFilter/SelectFilter";
 import Button from "../../../Components/Button/Button";
 import Input from "./../../../Components/Input/Input";
 import NewTripContext from "../NewTripContext";
-import useGettRequest from "../../../Hooks/useGetRequest";
+import debounce from "lodash.debounce";
+import usePostRequest from "../../../Hooks/usePostRequest";
 
 function CalculatePrice({ setValue }) {
   const {
@@ -19,22 +20,86 @@ function CalculatePrice({ setValue }) {
 
   const [isPriceCalculated, setIsPriceCalculated] = useState(false);
   const [originAutoComplete, setOriginAutoComplete] = useState([]);
+  const originLongLat = useRef({});
+  const destinationLongLat = useRef({});
+  const distance = useRef({});
+  // const [originLongLat, setOriginLongLat] = useState({});
+  // const [destinationLongLat, setDestinationLongLat] = useState({});
 
-  const [getOriginAutoComplete] = useGettRequest(
-    `https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:pe&
-    location=-8.393103545126111%2C-74.5832693901913
-    &
-    radius=8000
-    &&
-    key=asdfasdfsadfsadfsdafsafsadfsdf
-    &
-    input=${originPoint}`,
+  const [GetOriginAutoComplete] = usePostRequest(
+    `${
+      process.env.REACT_APP_TERA_URL + "back-office/google-places-autocomplete"
+    }`,
     setOriginAutoComplete
   );
 
+  const GetOriginAutoCompleteDebounce = debounce((place) => {
+    GetOriginAutoComplete({
+      search_input: place,
+    });
+  }, 200);
+
+  const [GetDistinationAutoComplete] = usePostRequest(
+    `${
+      process.env.REACT_APP_TERA_URL + "back-office/google-places-autocomplete"
+    }`,
+    setOriginAutoComplete
+  );
+
+  const GetDistinationAutoCompleteDebounce = debounce((place) => {
+    GetDistinationAutoComplete({
+      search_input: place,
+    });
+  }, 200);
+
+  const [getOriginLongLat] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/google-places-get-place"}`,
+    // setOriginLongLat,
+    {
+      placeId: originPoint?.place_id,
+    },
+    (data) => {
+      originLongLat.current = data?.result?.geometry?.location;
+    }
+  );
+  const [getDestinationLongLat] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/google-places-get-place"}`,
+    // setDestinationLongLat,
+    {
+      placeId: destinationPoint?.place_id,
+    },
+    (data) => {
+      destinationLongLat.current = data?.result?.geometry?.location;
+    }
+  );
+  const [getDistance] = usePostRequest(
+    `${
+      process.env.REACT_APP_TERA_URL + "back-office/google-places-get-distance"
+    }`,
+    {
+      destinationLat: destinationLongLat.current?.lat,
+      destinationLng: destinationLongLat.current?.lng,
+      originLat: originLongLat.current?.lat,
+      originLng: originLongLat.current?.lng,
+    },
+    (data) => {
+      console.log(data);
+      console.log(data?.rows?.elements?.distance?.value);
+      getPrice({
+        distance: data?.rows?.elements?.distance?.value,
+      });
+      // distance.current = data;
+    }
+  );
+
+  const [getPrice] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "api/trip/price"}`,
+    setPrice
+  );
+
   useEffect(() => {
-    console.log(originAutoComplete);
-  }, [originAutoComplete]);
+    setIsPriceCalculated(false);
+  }, [originPoint, destinationPoint]);
 
   return (
     <div
@@ -43,35 +108,50 @@ function CalculatePrice({ setValue }) {
     >
       <label className="text-3xl font-extrabold pt-8">Nuevo Viaje</label>
       <div className="flex flex-col gap-2">
-        <Input
-          //   label="Código"
-          placeholder="Punto de Origen"
-          value={originPoint}
-          onChange={(e) => {
-            setOriginPoint(e.target.value);
-            setIsPriceCalculated(false);
-            // getOriginAutoComplete();
+        <SelectFilter
+          label="Punto de Origen"
+          style="big"
+          data={originAutoComplete?.predictions}
+          mapKey={"place_id"}
+          option={"description"}
+          setSelected={setOriginPoint}
+          selected={originPoint}
+          onInputChange={(v) => {
+            GetOriginAutoCompleteDebounce(v);
           }}
-          validationType="alphabetic"
         />
-        <Input
-          //   label="Código"
-          placeholder="Punto de Destino"
-          value={destinationPoint}
-          onChange={(e) => {
-            setDestinationPoint(e.target.value);
-            setIsPriceCalculated(false);
+        <SelectFilter
+          label="Punto de Destino"
+          style="big"
+          data={originAutoComplete?.predictions}
+          mapKey={"place_id"}
+          option={"description"}
+          setSelected={setDestinationPoint}
+          selected={destinationPoint}
+          onInputChange={(v) => {
+            GetDistinationAutoCompleteDebounce(v);
           }}
-          validationType="alphabetic"
         />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <Button
           text="Calcular"
           design={"success"}
-          onClick={() => {
-            setPrice("5");
+          onClick={async () => {
+            // setPrice("5");
             setIsPriceCalculated(true);
+            await getOriginLongLat();
+            await getDestinationLongLat();
+            if (originLongLat.current && destinationLongLat.current) {
+              console.log(destinationLongLat.current);
+              console.log(originLongLat.current);
+              getDistance({
+                destinationLat: destinationLongLat.current?.lat,
+                destinationLng: destinationLongLat.current?.lng,
+                originLat: originLongLat.current?.lat,
+                originLng: originLongLat.current?.lng,
+              });
+            }
           }}
         />
       </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import Option from "../Option/Option";
 import SelectFilterContext from "../SelectContext";
 import { dropdownContainer } from "../SelectStyle";
@@ -26,12 +26,30 @@ function DropdownContainer({
     // prevInputValue,
   } = useContext(SelectFilterContext);
 
-  const dropdownContainerStyle = {
+  const dropdownContainerStyle = useRef({
     ...dropdownContainer,
     width: rect?.width,
     left: rect?.left,
     top: rect?.top + rect?.height,
-  };
+  });
+
+  // const dropdownContainerStyle = {
+  //   ...dropdownContainer,
+  //   width: rect?.width,
+  //   left: rect?.left,
+  //   top: rect?.top + rect?.height,
+  // };
+
+  useEffect(() => {
+    console.log(rect?.top);
+    dropdownContainerStyle.current = {
+      ...dropdownContainer,
+      width: rect?.width,
+      left: rect?.left,
+      top: rect?.top + rect?.height,
+    };
+    console.log(dropdownContainerStyle.current);
+  }, [rect?.top]);
 
   return (
     <>
@@ -50,7 +68,7 @@ function DropdownContainer({
           //   >
           <div
             className={show ? "show" : "noshow"}
-            style={dropdownContainerStyle}
+            style={dropdownContainerStyle.current}
           >
             {(dataFilter.length > 0 ? dataFilter : data)?.map((v) => (
               <Option
