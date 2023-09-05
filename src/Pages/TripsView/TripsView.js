@@ -11,6 +11,8 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
 import AsignedTrips from "../../Layouts/AsignedTrips/AsignedTrips";
+import TripsToAsign from "../../Layouts/AsignedTrips/TripsToAsign";
+import TripsPanel from "../../Layouts/TripsPanel/TripsPanel";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,16 +76,16 @@ function TripsView() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <AsignedTrips />
+            <TripsPanel section={"NoAsigned"} />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            Item Two
+            <TripsPanel section={"Asigned"} />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
+            <TripsPanel section={"Completed"} />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Item Three
+            <TripsPanel section={"Canceled"} />
           </TabPanel>
         </SwipeableViews>
       </TabContext>

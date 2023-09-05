@@ -4,7 +4,7 @@ import TripDisplay from "../../Components/TripDisplay/TripDisplay";
 import useGettRequest from "../../Hooks/useGetRequest";
 import usePostRequest from "../../Hooks/usePostRequest";
 
-function AsignedTrips() {
+function TripsPanel({ section }) {
   const [tripList, setTripList] = useState([]);
   const [driversList, setDriversList] = useState([]);
   const [tripStateList, setTripStateList] = useState([]);
@@ -12,7 +12,16 @@ function AsignedTrips() {
   const [getTripList] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
     setTripList,
-    { trip_state: 6 }
+    {
+      trip_state:
+        section === "NoAsigned"
+          ? 1
+          : section === "Completed"
+          ? 6
+          : section === "Canceled"
+          ? 7
+          : 4,
+    }
   );
 
   const [getDriversList] = usePostRequest(
@@ -39,10 +48,11 @@ function AsignedTrips() {
           trip={trip?.fields}
           driversList={driversList?.map((driver) => driver.fields)}
           tripStateList={tripStateList}
+          tripSection={section}
         />
       ))}
     </div>
   );
 }
 
-export default AsignedTrips;
+export default TripsPanel;

@@ -3,7 +3,7 @@
 //   printEnd,
 //   printCollapsed,
 // } from "../../../../../../utils/consoleToPrint";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { distinct } from "../../../../../../utils/helpers";
 // import GruposHorariosDocentesContext from "../../../../../../context/GrupoHorariosDocentesProvider";
 // import NewGroupFormContext from "../../../NewGroupFormContext";
@@ -22,6 +22,16 @@ export const SelectApi = (data, option, selected, onInputChange) => {
     prevSelectedRef,
     prevInputValue,
   } = useContext(SelectFilterContext);
+
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+
+  // const toggleScroll = () => {
+  //   setScrollEnabled(!scrollEnabled);
+  // };
+
+  useEffect(() => {
+    document.body.style.overflowY = scrollEnabled ? "auto" : "hidden";
+  }, [scrollEnabled]);
 
   // ****************************************************************************
   // CAMBIO DE SELECCIÓN
@@ -97,10 +107,12 @@ export const SelectApi = (data, option, selected, onInputChange) => {
     if (inputRef.current !== undefined) {
       inputRef.current.value = "";
     }
+    setScrollEnabled(false);
     setShow(true);
   };
 
   const CloseDropdown = () => {
+    setScrollEnabled(true);
     if (inputRef.current !== undefined) {
       inputRef.current.value =
         prevInputValue.current == undefined ? "" : prevInputValue.current;

@@ -3,24 +3,40 @@ import Paper from "@mui/material/Paper";
 import SelectFilter from "../SelectFilter/SelectFilter";
 import Button from "../Button/Button";
 import usePostRequest from "../../Hooks/usePostRequest";
+import Input from "../Input/Input";
 
-function TripDisplay({ trip, driversList, tripStateList }) {
+function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
   const [driver, setDriver] = useState({});
   const [tripState, setTripState] = useState({});
+
+  console.log(trip?.driver);
+  console.log(driversList);
+  console.log(driversList.find((v) => v.pk === trip?.driver));
+
+  useEffect(() => {
+    if (tripSection === "Asigned") {
+      setDriver(driversList.find((v) => v.pk === trip?.driver));
+    }
+  }, []);
 
   return (
     <Paper elevation={3}>
       <div className="grid grid-cols-4 m-4 gap-6 p-4 items-center">
         <PlaceInfo trip={trip} />
-        <SelectFilter
-          data={tripStateList}
-          label={"Estado de viaje"}
-          style={"big"}
-          option={"trip_state_name"}
-          mapKey={"id"}
-          selected={tripState}
-          setSelected={setTripState}
-        />
+        {tripSection === "Asigned" ? (
+          <SelectFilter
+            data={tripStateList}
+            label={"Estado de viaje"}
+            style={"big"}
+            option={"trip_state_name"}
+            mapKey={"id"}
+            selected={tripState}
+            setSelected={setTripState}
+          />
+        ) : (
+          <div></div>
+        )}
+
         {/* //Elegir conductor */}
         <SelectFilter
           data={driversList}
@@ -31,13 +47,23 @@ function TripDisplay({ trip, driversList, tripStateList }) {
           selected={driver}
           setSelected={setDriver}
         />
-        <Button
-          text="Guardar Cambios"
-          design={"success"}
-          onClick={() => {
-            console.log("Guardar Cambios");
-          }}
-        />
+        {tripSection === "Canceled" ? (
+          <Input
+            label="Motivo"
+            value={trip?.canceled_motive}
+            style={"disabled"}
+          />
+        ) : tripSection === "Completed" ? (
+          <div></div>
+        ) : (
+          <Button
+            text="Guardar Cambios"
+            design={"success"}
+            onClick={() => {
+              console.log("Guardar Cambios");
+            }}
+          />
+        )}
       </div>
     </Paper>
   );

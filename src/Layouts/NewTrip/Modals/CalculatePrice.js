@@ -84,9 +84,9 @@ function CalculatePrice({ setValue }) {
     },
     (data) => {
       console.log(data);
-      console.log(data?.rows?.elements?.distance?.value);
+      console.log(data?.rows[0]?.elements[0]?.distance?.value);
       getPrice({
-        distance: data?.rows?.elements?.distance?.value,
+        distance: data?.rows[0]?.elements[0]?.distance?.value,
       });
       // distance.current = data;
     }
@@ -155,7 +155,7 @@ function CalculatePrice({ setValue }) {
           }}
         />
       </div>
-      <Input label="Precio" value={price} style={"disabled"} />
+      <Input label="Precio" value={price?.price} style={"disabled"} />
       <div className="grid grid-cols-2 gap-2">
         <Button
           text="Continuar"

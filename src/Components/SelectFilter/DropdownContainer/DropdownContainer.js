@@ -41,48 +41,47 @@ function DropdownContainer({
   // };
 
   useEffect(() => {
-    console.log(rect?.top);
     dropdownContainerStyle.current = {
       ...dropdownContainer,
       width: rect?.width,
       left: rect?.left,
       top: rect?.top + rect?.height,
     };
-    console.log(dropdownContainerStyle.current);
   }, [rect?.top]);
 
   return (
     <>
       {select.IsOpened() &&
         createPortal(
-          //   <div
-          //     style={{
-          //       position: "fixed",
-          //       //   display: "none",
-          //       zIndex: "1300",
-          //       right: "0",
-          //       left: "0",
-          //       top: "0",
-          //       bottom: "0",
-          //     }}
-          //   >
           <div
-            className={show ? "show" : "noshow"}
-            style={dropdownContainerStyle.current}
+            style={{
+              position: "fixed",
+              //   display: "none",
+              zIndex: "1300",
+              right: "0",
+              left: "0",
+              top: "0",
+              bottom: "0",
+            }}
           >
-            {(dataFilter.length > 0 ? dataFilter : data)?.map((v) => (
-              <Option
-                key={v[mapKey]}
-                v={v}
-                mapKey={mapKey}
-                option={option}
-                setSelected={setSelected}
-                ArrayOption={ArrayOption}
-                data={data}
-              />
-            ))}
+            <div
+              className={show ? "show" : "noshow"}
+              style={dropdownContainerStyle.current}
+            >
+              {(dataFilter.length > 0 ? dataFilter : data)?.map((v) => (
+                <Option
+                  key={v[mapKey]}
+                  v={v}
+                  mapKey={mapKey}
+                  option={option}
+                  setSelected={setSelected}
+                  ArrayOption={ArrayOption}
+                  data={data}
+                />
+              ))}
+            </div>
+            ,
           </div>,
-          //   </div>,
           document.body
         )}
       {/* <div
