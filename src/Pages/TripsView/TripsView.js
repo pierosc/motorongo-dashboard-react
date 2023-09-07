@@ -10,8 +10,8 @@ import NewTrip from "../../Layouts/NewTrip/NewTrip";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
-import AsignedTrips from "../../Layouts/AsignedTrips/AsignedTrips";
-import TripsToAsign from "../../Layouts/AsignedTrips/TripsToAsign";
+// import AsignedTrips from "../../Layouts/AsignedTrips/AsignedTrips";
+// import TripsToAsign from "../../Layouts/AsignedTrips/TripsToAsign";
 import TripsPanel from "../../Layouts/TripsPanel/TripsPanel";
 
 function TabPanel(props) {
