@@ -3,12 +3,6 @@ import TableCell from "@mui/material/TableCell";
 import { labelColor } from "../Styles/Styles";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import {
-  print,
-  printGroup,
-  printEnd,
-  printCollapsed,
-} from "./../../../../utils/utils";
 
 function EditColum({ settings, row, isItemSelected, setEditSelected }) {
   const handleEditSelection = (name) => {

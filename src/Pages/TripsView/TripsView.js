@@ -4,15 +4,14 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import PropTypes from "prop-types";
-// import TabPanel from "@mui/lab/TabPanel";
-// import TripList from "../../Layouts/AsignedTrips/AsignedTrips";
 import NewTrip from "../../Layouts/NewTrip/NewTrip";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
-// import AsignedTrips from "../../Layouts/AsignedTrips/AsignedTrips";
-// import TripsToAsign from "../../Layouts/AsignedTrips/TripsToAsign";
-import TripsPanel from "../../Layouts/TripsPanel/TripsPanel";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import TripOngoing from "../../Layouts/TripOngoing/TripOngoing";
+import TripEnded from "../../Layouts/TripEnded/TripEnded";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,19 +75,20 @@ function TripsView() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <TripsPanel section={"NoAsigned"} />
+            <TripOngoing section={"NoAsigned"} />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <TripsPanel section={"Asigned"} />
+            <TripOngoing section={"Asigned"} />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <TripsPanel section={"Completed"} />
+            <TripEnded section={"Completed"} />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <TripsPanel section={"Canceled"} />
+            <TripEnded section={"Canceled"} />
           </TabPanel>
         </SwipeableViews>
       </TabContext>
+      <ToastContainer />
     </Box>
   );
 }

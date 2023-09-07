@@ -28,7 +28,7 @@ import Header from "./Header/Header";
 import Toolbar from "./Toolbar/Toolbar";
 import FilterGroup from "../FilterGroup/FilterGroup";
 import { v4 as uuidv4 } from "uuid";
-import { useSessionStorage } from "../../../hooks/useStorage";
+// import { useSessionStorage } from "../../../hooks/useStorage";
 //**************************************************************************
 //********************************* ORDER **********************************
 
@@ -63,7 +63,7 @@ function stableSort(array, comparator) {
 //******************************* TABLE BODY *******************************
 //**************************************************************************
 
-function Table({
+function CustomTable({
   settings,
   data,
   selected,
@@ -304,4 +304,4 @@ function Table({
   );
 }
 
-export default Table;
+export default CustomTable;

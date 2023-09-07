@@ -10,12 +10,17 @@ import usePostRequest from "../../../Hooks/usePostRequest";
 
 function CalculatePrice({ setValue }) {
   const {
+    client,
     price,
     setPrice,
     originPoint,
     setOriginPoint,
     destinationPoint,
     setDestinationPoint,
+    originRef,
+    setOriginRef,
+    destinationRef,
+    setDestinationRef,
   } = useContext(NewTripContext);
 
   const [isPriceCalculated, setIsPriceCalculated] = useState(false);
@@ -101,6 +106,10 @@ function CalculatePrice({ setValue }) {
     setIsPriceCalculated(false);
   }, [originPoint, destinationPoint]);
 
+  useEffect(() => {
+    console.log(client);
+  }, []);
+
   return (
     <div
       className="flex flex-col justify-between p-4"
@@ -120,6 +129,12 @@ function CalculatePrice({ setValue }) {
             GetOriginAutoCompleteDebounce(v);
           }}
         />
+        <Input
+          label="Referencia de Origen"
+          placeholder="Referencia de Origen"
+          value={originRef}
+          onChange={(e) => setOriginRef(e.target.value)}
+        />
         <SelectFilter
           label="Punto de Destino"
           style="big"
@@ -132,6 +147,12 @@ function CalculatePrice({ setValue }) {
             GetDistinationAutoCompleteDebounce(v);
           }}
         />
+        <Input
+          label="Referencia de Destino"
+          placeholder="Referencia de Destino"
+          value={destinationRef}
+          onChange={(e) => setDestinationRef(e.target.value)}
+        />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <Button
@@ -143,8 +164,8 @@ function CalculatePrice({ setValue }) {
             await getOriginLongLat();
             await getDestinationLongLat();
             if (originLongLat.current && destinationLongLat.current) {
-              console.log(destinationLongLat.current);
-              console.log(originLongLat.current);
+              // console.log(destinationLongLat.current);
+              // console.log(originLongLat.current);
               getDistance({
                 destinationLat: destinationLongLat.current?.lat,
                 destinationLng: destinationLongLat.current?.lng,

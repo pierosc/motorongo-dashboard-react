@@ -70,7 +70,10 @@ function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
 }
 
 function PlaceInfo({ trip }) {
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState({
+    first_name: "--",
+    last_name: "--",
+  });
 
   const [getCustomerData] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,

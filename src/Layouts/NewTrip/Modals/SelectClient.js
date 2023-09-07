@@ -33,7 +33,7 @@ function SelectClient({ setValue }) {
         <SelectFilter
           label="Pasajero"
           style="big"
-          data={clientList?.map((driver) => driver.fields)}
+          data={clientList?.map((client) => client.fields)}
           mapKey={"identity_document"}
           option={"first_name"}
           setSelected={setClient}
@@ -54,7 +54,7 @@ function SelectClient({ setValue }) {
       <div className="grid grid-cols-2 gap-2">
         <Button
           text="Continuar"
-          design={"success"}
+          design={Object.keys(client)?.length != 0 ? "success" : "disabled"}
           onClick={() => {
             setValue(2);
           }}

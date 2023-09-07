@@ -6,9 +6,9 @@ import {
   printEnd,
   printGroup,
   printCollapsed,
-} from "./../../../utils/utils";
+} from "../../Utils/consoleToPrint";
 import SelectFilter from "../Filter/SelectFilter";
-import { useSessionStorage } from "../../../hooks/useStorage";
+import { useSessionStorage } from "../hooks/useStorage";
 import { Button } from "@mui/material";
 
 function FilterGroup({ data, filteredData, setFilteredData }) {

@@ -28,7 +28,7 @@ const NewTripProvider = ({ children }) => {
   // ****************************************************************************
 
   const [clientList, setClientList] = useState([]);
-  const [driverList, setDriverList] = useState([]);
+  const [driversList, setDriversList] = useState([]);
 
   return (
     <NewTripContext.Provider
@@ -60,8 +60,8 @@ const NewTripProvider = ({ children }) => {
         // LISTS VALUES----
         clientList,
         setClientList,
-        driverList,
-        setDriverList,
+        driversList,
+        setDriversList,
       }}
     >
       {children}

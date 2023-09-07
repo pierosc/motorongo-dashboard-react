@@ -4,7 +4,7 @@ import TripDisplay from "../../Components/TripDisplay/TripDisplay";
 import useGettRequest from "../../Hooks/useGetRequest";
 import usePostRequest from "../../Hooks/usePostRequest";
 
-function TripsPanel({ section }) {
+function TripOngoing({ section }) {
   const [tripList, setTripList] = useState([]);
   const [driversList, setDriversList] = useState([]);
   const [tripStateList, setTripStateList] = useState([]);
@@ -55,4 +55,4 @@ function TripsPanel({ section }) {
   );
 }
 
-export default TripsPanel;
+export default TripOngoing;

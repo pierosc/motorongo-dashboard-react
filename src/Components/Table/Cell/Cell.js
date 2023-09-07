@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TableCell from "@mui/material/TableCell";
 import { labelColor } from "../Styles/Styles";
-import CustomInput from "../../CustomInput/CustomInput";
 
 function Cell({ settings, row, data, index, isItemSelected }) {
   const [cellValue, setCellValue] = useState(row[data.id]);
