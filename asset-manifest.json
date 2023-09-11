@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/motorongo-dashboard-react/static/css/main.d88e8c85.css",
-    "main.js": "/motorongo-dashboard-react/static/js/main.d823d10d.js",
+    "main.css": "/motorongo-dashboard-react/static/css/main.e24a99f8.css",
+    "main.js": "/motorongo-dashboard-react/static/js/main.d92fc15e.js",
     "static/js/787.b8968bcc.chunk.js": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js",
     "static/media/BG.jpg": "/motorongo-dashboard-react/static/media/BG.bddc734b75feea837952.jpg",
     "index.html": "/motorongo-dashboard-react/index.html",
-    "main.d88e8c85.css.map": "/motorongo-dashboard-react/static/css/main.d88e8c85.css.map",
-    "main.d823d10d.js.map": "/motorongo-dashboard-react/static/js/main.d823d10d.js.map",
+    "main.e24a99f8.css.map": "/motorongo-dashboard-react/static/css/main.e24a99f8.css.map",
+    "main.d92fc15e.js.map": "/motorongo-dashboard-react/static/js/main.d92fc15e.js.map",
     "787.b8968bcc.chunk.js.map": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d88e8c85.css",
-    "static/js/main.d823d10d.js"
+    "static/css/main.e24a99f8.css",
+    "static/js/main.d92fc15e.js"
   ]
 }
