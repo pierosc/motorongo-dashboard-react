@@ -158,38 +158,38 @@ function CalculatePrice({ setValue }) {
           value={destinationRef}
           onChange={(e) => setDestinationRef(e.target.value)}
         />
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        <Button
-          text="Calcular"
-          design={"success"}
-          onClick={async () => {
-            // setPrice("5");
-            setIsPriceCalculated(true);
-            await getOriginLongLat();
-            await getDestinationLongLat();
-            if (originLongLat.current && destinationLongLat.current) {
-              // console.log(destinationLongLat.current);
-              // console.log(originLongLat.current);
-              getDistance({
-                destinationLat: destinationLongLat.current?.lat,
-                destinationLng: destinationLongLat.current?.lng,
-                originLat: originLongLat.current?.lat,
-                originLng: originLongLat.current?.lng,
-              });
-            }
-          }}
-        />
-      </div>
-      <Input label="Precio" value={price?.price} style={"disabled"} />
-      <div className="grid grid-cols-2 gap-2">
-        <Button
-          text="Continuar"
-          design={isPriceCalculated ? "success" : "disabled"}
-          onClick={() => {
-            setValue(3);
-          }}
-        />
+        <div className="grid grid-cols-2 gap-2">
+          <Button
+            text="Calcular"
+            design={"success"}
+            onClick={async () => {
+              // setPrice("5");
+              setIsPriceCalculated(true);
+              await getOriginLongLat();
+              await getDestinationLongLat();
+              if (originLongLat.current && destinationLongLat.current) {
+                // console.log(destinationLongLat.current);
+                // console.log(originLongLat.current);
+                getDistance({
+                  destinationLat: destinationLongLat.current?.lat,
+                  destinationLng: destinationLongLat.current?.lng,
+                  originLat: originLongLat.current?.lat,
+                  originLng: originLongLat.current?.lng,
+                });
+              }
+            }}
+          />
+        </div>
+        <Input label="Precio" value={price?.price} style={"disabled"} />
+        <div className="grid grid-cols-2 gap-2">
+          <Button
+            text="Continuar"
+            design={isPriceCalculated ? "success" : "disabled"}
+            onClick={() => {
+              setValue(3);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

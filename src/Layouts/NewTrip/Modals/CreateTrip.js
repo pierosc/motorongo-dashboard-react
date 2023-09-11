@@ -7,7 +7,7 @@ import Input from "./../../../Components/Input/Input";
 import NewTripContext from "../NewTripContext";
 import usePostRequest from "../../../Hooks/usePostRequest";
 
-function CreateTrip({ setValue, handleClose }) {
+function CreateTrip({ setValue, handleClose, setTripList }) {
   const {
     client,
     distance,
@@ -18,16 +18,24 @@ function CreateTrip({ setValue, handleClose }) {
     originPoint,
     destinationRef,
     destinationPoint,
-    driversList,
-    setDriversList,
-    driver,
-    setDriver,
+    // driversList,
+    // setDriversList,
+    // driver,
+    // setDriver,
   } = useContext(NewTripContext);
 
-  const [getDriversList] = usePostRequest(
-    `${process.env.REACT_APP_TERA_URL + "back-office/driver/list"}`,
-    setDriversList,
-    { driver_state: true }
+  // const [getDriversList] = usePostRequest(
+  //   `${process.env.REACT_APP_TERA_URL + "back-office/driver/list"}`,
+  //   setDriversList,
+  //   { driver_state: true }
+  // );
+
+  const [getTripList] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
+    setTripList,
+    {
+      trip_state: [1], //Ongoing
+    }
   );
 
   const [createTrip] = usePostRequest(
@@ -48,12 +56,13 @@ function CreateTrip({ setValue, handleClose }) {
     },
     (data) => {
       console.log(data);
+      getTripList();
       handleClose();
     }
   );
 
   useEffect(() => {
-    getDriversList();
+    // getDriversList();
     console.log("--*******************--");
     console.log(client);
     console.log(distance);
@@ -64,7 +73,7 @@ function CreateTrip({ setValue, handleClose }) {
     console.log(originPoint);
     console.log(destinationRef);
     console.log(destinationPoint);
-    console.log(driver);
+    // console.log(driver);
     // console.log(price)
     // console.log(price)
 
@@ -99,7 +108,7 @@ function CreateTrip({ setValue, handleClose }) {
           style={"disabled"}
         />
         <Input label="Precio" value={price?.price} style={"disabled"} />
-        <SelectFilter
+        {/* <SelectFilter
           data={driversList}
           label={"Elegir conductor"}
           style={"big"}
@@ -107,7 +116,7 @@ function CreateTrip({ setValue, handleClose }) {
           mapKey={"pk"}
           selected={driver}
           setSelected={setDriver}
-        />
+        /> */}
         <Button
           text="Crear viaje"
           design={"success"}

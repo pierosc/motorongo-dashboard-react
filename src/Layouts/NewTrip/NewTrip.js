@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import NewTripModalController from "./Modals/NewTripModalController";
 import { NewTripProvider } from "./NewTripContext";
 
-function NewTrip() {
+function NewTrip({ setTripList }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,7 +18,10 @@ function NewTrip() {
       </div>
       <Modal open={open}>
         <>
-          <NewTripModalController handleClose={handleClose} />
+          <NewTripModalController
+            handleClose={handleClose}
+            setTripList={setTripList}
+          />
         </>
       </Modal>
     </NewTripProvider>

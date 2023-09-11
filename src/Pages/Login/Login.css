@@ -83,18 +83,19 @@
   background-size: cover;
   background-position: center;
 } */
+
 .BG_login {
   background-repeat: no-repeat;
-  background-image: url(../../assets/BG.png);
+  background-image: url(../../assets/BG.jpg);
   background-size: cover;
   background-position: center;
 }
 
-@media only screen and (max-width: 425px) {
+/* @media only screen and (max-width: 425px) {
   body {
-    background-image: url(../../assets/BG-MOVIL.png);
-  }
-}
+    /* background-image: url(../../assets/BG-MOVIL.png); */
+  /* } */
+/* } */ 
 
 .lds-circle {
   display: inline-block;

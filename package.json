@@ -1,5 +1,5 @@
 {
-  "homepage":"https://pierosc.github.io/motorongo-dashboard-react",
+  "homepage": "https://pierosc.github.io/motorongo-dashboard-react",
   "name": "motorongo-dashboard-react",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +18,8 @@
     "postcss": "8.4.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-swipeable-views-react-18-fix": "^0.14.1",
     "react-toastify": "^9.1.1",
@@ -25,8 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

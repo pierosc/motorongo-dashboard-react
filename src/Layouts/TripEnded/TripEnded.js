@@ -59,7 +59,7 @@ function TripEnded({ section }) {
     header: [
       {
         label: "Pasajero",
-        id: "customer",
+        id: "customer_full_name",
       },
       {
         label: "Pasajero Calificación",
@@ -67,7 +67,7 @@ function TripEnded({ section }) {
       },
       {
         label: "Conductor",
-        id: "driver",
+        id: "driver_full_name",
       },
       {
         label: "Conductor Calificación",
@@ -101,14 +101,12 @@ function TripEnded({ section }) {
     dataKey: "pk",
     data:
       section === "Completed"
-        ? tripList?.map((trip) => trip.fields)
-        : tripList
-            ?.map((trip) => trip.fields)
-            .map((trip) => ({
-              ...trip,
-              cancelador: trip?.canceled_motive?.split(" :")[0],
-              CancelMotive: trip?.canceled_motive?.split(" :")[1] ?? "",
-            })),
+        ? tripList
+        : tripList?.map((trip) => ({
+            ...trip,
+            cancelador: trip?.canceled_motive?.split(" :")[0],
+            CancelMotive: trip?.canceled_motive?.split(" :")[1] ?? "",
+          })),
   };
 
   return (

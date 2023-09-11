@@ -49,6 +49,7 @@ function a11yProps(index) {
 function TripsView() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [tripList, setTripList] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,7 +60,7 @@ function TripsView() {
   };
   return (
     <Box sx={{ typography: "body1" }}>
-      <NewTrip />
+      <NewTrip setTripList={setTripList} />
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange}>
@@ -75,10 +76,18 @@ function TripsView() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <TripOngoing section={"NoAsigned"} />
+            <TripOngoing
+              section={"NoAsigned"}
+              tripList={tripList}
+              setTripList={setTripList}
+            />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <TripOngoing section={"Asigned"} />
+            <TripOngoing
+              section={"Asigned"}
+              tripList={tripList}
+              setTripList={setTripList}
+            />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
             <TripEnded section={"Completed"} />

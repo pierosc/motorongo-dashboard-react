@@ -5,7 +5,13 @@ import Button from "../Button/Button";
 import usePostRequest from "../../Hooks/usePostRequest";
 import Input from "../Input/Input";
 
-function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
+function TripDisplay({
+  trip,
+  driversList,
+  tripStateList,
+  tripSection,
+  getTripList,
+}) {
   const [driver, setDriver] = useState({});
   const [tripState, setTripState] = useState({});
 
@@ -13,16 +19,65 @@ function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
   console.log(driversList);
   console.log(driversList.find((v) => v.pk === trip?.driver));
 
+  const [AsignDriver] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/trip/update"}`,
+    // setDriversList,
+    {
+      trip_uuid: trip?.uuid,
+      trip_state: "2",
+      driver: driver?.pk,
+    },
+    (data) => {
+      getTripList();
+      console.log(data);
+    }
+  );
+
+  const [EditTrip] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/trip/update"}`,
+    // setDriversList,
+    {
+      trip_uuid: trip?.uuid,
+      trip_state: tripState?.id,
+      driver: driver?.pk,
+    },
+    (data) => {
+      getTripList();
+      console.log(data);
+    }
+  );
+
   useEffect(() => {
     if (tripSection === "Asigned") {
       setDriver(driversList.find((v) => v.pk === trip?.driver));
+      console.log(driversList.find((v) => v.pk === trip?.driver));
     }
   }, []);
 
+  const customerName = trip?.customer_full_name;
+  const destination =
+    trip?.destination_address?.split(",")[0] +
+    trip?.destination_address?.split(",")[1];
+  // "/" +
+  // trip?.destination_ref;
+  const origin =
+    trip?.origin_address?.split(",")[0] + trip?.origin_address?.split(",")[1];
+
   return (
     <Paper elevation={3}>
-      <div className="grid grid-cols-4 m-4 gap-6 p-4 items-center">
-        <PlaceInfo trip={trip} />
+      <div className="grid grid-cols-6 m-4 gap-6 p-4 items-center">
+        {/* <PlaceInfo trip={trip} /> */}
+        <div className="font-bold">{customerName}</div>
+        <div className="grid">
+          <div className="text-xs font-bold">Destino</div>
+          <div className="text-xs mb-2">{destination}</div>
+          <div className="text-xs">{trip?.destination_ref}</div>
+        </div>
+        <div className="grid">
+          <div className="text-xs font-bold">Origen</div>
+          <div className="text-xs mb-2">{origin}</div>
+          <div className="text-xs">{trip?.origin_ref}</div>
+        </div>
         {tripSection === "Asigned" ? (
           <SelectFilter
             data={tripStateList}
@@ -52,7 +107,11 @@ function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
           text="Guardar Cambios"
           design={"success"}
           onClick={() => {
-            console.log("Guardar Cambios");
+            if (tripSection === "Asigned") {
+              EditTrip();
+            } else {
+              AsignDriver();
+            }
           }}
         />
       </div>
@@ -61,32 +120,32 @@ function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
 }
 
 function PlaceInfo({ trip }) {
-  const [customer, setCustomer] = useState({
-    first_name: "--",
-    last_name: "--",
-  });
+  // const [customer, setCustomer] = useState({
+  //   first_name: "--",
+  //   last_name: "--",
+  // });
 
-  const [getCustomerData] = usePostRequest(
-    `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,
-    setCustomer,
-    { customer_uuid: trip?.customer }
-  );
+  // const [getCustomerData] = usePostRequest(
+  //   `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,
+  //   setCustomer,
+  //   { customer_uuid: trip?.customer }
+  // );
 
-  useEffect(() => {
-    getCustomerData();
-  }, []);
+  // useEffect(() => {
+  //   getCustomerData();
+  // }, []);
 
-  const customerName = customer?.first_name + " " + customer?.last_name;
+  const customerName = trip?.customer_full_name;
   const destination =
-    trip.destination_address.split(",")[0] +
-    trip.destination_address.split(",")[1] +
+    trip?.destination_address?.split(",")[0] +
+    trip?.destination_address?.split(",")[1] +
     "/" +
-    trip.destination_ref;
+    trip?.destination_ref;
   const origin =
-    trip.origin_address.split(",")[0] +
-    trip.origin_address.split(",")[1] +
+    trip?.origin_address?.split(",")[0] +
+    trip?.origin_address?.split(",")[1] +
     "/" +
-    trip.origin_ref;
+    trip?.origin_ref;
 
   return (
     <div className="grid ">

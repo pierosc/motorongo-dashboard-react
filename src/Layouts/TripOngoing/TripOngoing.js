@@ -4,8 +4,8 @@ import TripDisplay from "../../Components/TripDisplay/TripDisplay";
 import useGettRequest from "../../Hooks/useGetRequest";
 import usePostRequest from "../../Hooks/usePostRequest";
 
-function TripOngoing({ section }) {
-  const [tripList, setTripList] = useState([]);
+function TripOngoing({ section, tripList, setTripList }) {
+  // const [tripList, setTripList] = useState([]);
   const [driversList, setDriversList] = useState([]);
   const [tripStateList, setTripStateList] = useState([]);
 
@@ -38,10 +38,20 @@ function TripOngoing({ section }) {
     <div style={{ height: "70vh", overflow: "auto" }}>
       {tripList.map((trip, index) => (
         <TripDisplay
-          trip={trip?.fields}
-          driversList={driversList?.map((driver) => driver.fields)}
+          trip={trip}
+          // driversList={driversList?.map((driver) => [driver.fields])}
+          driversList={driversList.map((objeto) => {
+            const { model, pk, fields } = objeto;
+            console.log(objeto);
+            return {
+              model: model,
+              pk: pk,
+              ...fields, // Spread de todas las propiedades dentro de "fields"
+            };
+          })}
           tripStateList={tripStateList}
           tripSection={section}
+          getTripList={getTripList}
         />
       ))}
     </div>
