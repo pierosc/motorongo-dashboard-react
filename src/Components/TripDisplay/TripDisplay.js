@@ -47,23 +47,14 @@ function TripDisplay({ trip, driversList, tripStateList, tripSection }) {
           selected={driver}
           setSelected={setDriver}
         />
-        {tripSection === "Canceled" ? (
-          <Input
-            label="Motivo"
-            value={trip?.canceled_motive}
-            style={"disabled"}
-          />
-        ) : tripSection === "Completed" ? (
-          <div></div>
-        ) : (
-          <Button
-            text="Guardar Cambios"
-            design={"success"}
-            onClick={() => {
-              console.log("Guardar Cambios");
-            }}
-          />
-        )}
+
+        <Button
+          text="Guardar Cambios"
+          design={"success"}
+          onClick={() => {
+            console.log("Guardar Cambios");
+          }}
+        />
       </div>
     </Paper>
   );
@@ -100,7 +91,9 @@ function PlaceInfo({ trip }) {
   return (
     <div className="grid ">
       <div className="font-bold">{customerName}</div>
+      <div className="text-xs">Destino</div>
       <div className="text-xs mb-2">{destination}</div>
+      <div className="text-xs">Origen</div>
       <div className="text-xs">{origin}</div>
     </div>
   );

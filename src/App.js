@@ -1,7 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
 import TripsView from "./Pages/TripsView/TripsView";
-import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
           <TripsView />
         </div>
       </div>
-      v: 1.0.1
+      v: 1.0.3
     </div>
   );
 }

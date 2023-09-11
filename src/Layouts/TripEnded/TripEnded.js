@@ -15,14 +15,7 @@ function TripEnded({ section }) {
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
     setTripList,
     {
-      trip_state:
-        section === "NoAsigned"
-          ? 1
-          : section === "Completed"
-          ? 6
-          : section === "Canceled"
-          ? 7
-          : 4,
+      trip_state: section === "Completed" ? [6] : [7], //canceled
     }
   );
 
@@ -106,13 +99,16 @@ function TripEnded({ section }) {
       },
     ],
     dataKey: "pk",
-    data: tripList
-      ?.map((trip) => trip.fields)
-      .map((trip) => ({
-        ...trip,
-        cancelador: trip.canceled_motive.split(" :")[0],
-        CancelMotive: trip.canceled_motive.split(" :")[1] ?? "",
-      })),
+    data:
+      section === "Completed"
+        ? tripList?.map((trip) => trip.fields)
+        : tripList
+            ?.map((trip) => trip.fields)
+            .map((trip) => ({
+              ...trip,
+              cancelador: trip?.canceled_motive?.split(" :")[0],
+              CancelMotive: trip?.canceled_motive?.split(" :")[1] ?? "",
+            })),
   };
 
   return (

@@ -12,9 +12,10 @@ const NewTripProvider = ({ children }) => {
   const [originRef, setOriginRef] = useState("");
   const [destinationRef, setDestinationRef] = useState("");
   const [price, setPrice] = useState("");
-
+  const [distance, setDistance] = useState({});
   const [driver, setDriver] = useState({});
-
+  const originLongLat = useRef({});
+  const destinationLongLat = useRef({});
   // ****************************************************************************
   // VALORES DEL PASAJERO NUEVO
   // ****************************************************************************
@@ -46,9 +47,12 @@ const NewTripProvider = ({ children }) => {
         setDestinationRef,
         price,
         setPrice,
+        distance,
+        setDistance,
         driver,
         setDriver,
-
+        originLongLat,
+        destinationLongLat,
         // NEW CUSTOMER VALUES----
         fullName,
         setFullName,

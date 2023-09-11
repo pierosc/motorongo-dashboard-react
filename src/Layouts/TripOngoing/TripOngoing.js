@@ -13,14 +13,7 @@ function TripOngoing({ section }) {
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
     setTripList,
     {
-      trip_state:
-        section === "NoAsigned"
-          ? 1
-          : section === "Completed"
-          ? 6
-          : section === "Canceled"
-          ? 7
-          : 4,
+      trip_state: section === "NoAsigned" ? [1] : [2, 3, 4, 5, 8], //Ongoing
     }
   );
 

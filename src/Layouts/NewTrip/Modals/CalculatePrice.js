@@ -21,13 +21,16 @@ function CalculatePrice({ setValue }) {
     setOriginRef,
     destinationRef,
     setDestinationRef,
+    originLongLat,
+    destinationLongLat,
+    setDistance,
   } = useContext(NewTripContext);
 
   const [isPriceCalculated, setIsPriceCalculated] = useState(false);
   const [originAutoComplete, setOriginAutoComplete] = useState([]);
-  const originLongLat = useRef({});
-  const destinationLongLat = useRef({});
-  const distance = useRef({});
+  // const originLongLat = useRef({});
+  // const destinationLongLat = useRef({});
+  // const distance = useRef({});
   // const [originLongLat, setOriginLongLat] = useState({});
   // const [destinationLongLat, setDestinationLongLat] = useState({});
 
@@ -81,6 +84,7 @@ function CalculatePrice({ setValue }) {
     `${
       process.env.REACT_APP_TERA_URL + "back-office/google-places-get-distance"
     }`,
+    setDistance,
     {
       destinationLat: destinationLongLat.current?.lat,
       destinationLng: destinationLongLat.current?.lng,
@@ -88,8 +92,9 @@ function CalculatePrice({ setValue }) {
       originLng: originLongLat.current?.lng,
     },
     (data) => {
-      console.log(data);
-      console.log(data?.rows[0]?.elements[0]?.distance?.value);
+      // console.log(data);
+      // console.log(data?.rows[0]?.elements[0]?.distance?.value);
+      // setDistance(data)
       getPrice({
         distance: data?.rows[0]?.elements[0]?.distance?.value,
       });

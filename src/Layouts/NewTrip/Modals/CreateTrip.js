@@ -7,8 +7,12 @@ import Input from "./../../../Components/Input/Input";
 import NewTripContext from "../NewTripContext";
 import usePostRequest from "../../../Hooks/usePostRequest";
 
-function CreateTrip({ setValue }) {
+function CreateTrip({ setValue, handleClose }) {
   const {
+    client,
+    distance,
+    originLongLat,
+    destinationLongLat,
     price,
     originRef,
     originPoint,
@@ -26,8 +30,45 @@ function CreateTrip({ setValue }) {
     { driver_state: true }
   );
 
+  const [createTrip] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/trip/create"}`,
+    // setDriversList,
+    {
+      identity_document: client?.identity_document,
+      origin_lat: originLongLat?.current?.lat,
+      origin_lon: originLongLat?.current?.lng,
+      destination_lat: destinationLongLat?.current?.lat,
+      destination_lon: destinationLongLat?.current?.lng,
+      distance: distance?.rows[0]?.elements[0]?.distance?.value,
+      coupon: "",
+      origin_address: originPoint?.description,
+      origin_ref: originRef,
+      destination_address: destinationPoint?.description,
+      destination_ref: destinationRef,
+    },
+    (data) => {
+      console.log(data);
+      handleClose();
+    }
+  );
+
   useEffect(() => {
     getDriversList();
+    console.log("--*******************--");
+    console.log(client);
+    console.log(distance);
+    console.log(originLongLat);
+    console.log(destinationLongLat);
+    console.log(price);
+    console.log(originRef);
+    console.log(originPoint);
+    console.log(destinationRef);
+    console.log(destinationPoint);
+    console.log(driver);
+    // console.log(price)
+    // console.log(price)
+
+    console.log("--*******************--");
   }, []);
 
   return (
@@ -68,10 +109,11 @@ function CreateTrip({ setValue }) {
           setSelected={setDriver}
         />
         <Button
-          text="Continuar"
+          text="Crear viaje"
           design={"success"}
           onClick={() => {
-            setValue(1);
+            createTrip();
+            // setValue(1);
           }}
         />
       </div>

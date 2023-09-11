@@ -16,9 +16,9 @@ function NewTrip() {
         <label className="text-2xl">VIAJA EN MOTOCAR</label>
         <Button text="Nuevo viaje" design={"success"} onClick={handleOpen} />
       </div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open}>
         <>
-          <NewTripModalController />
+          <NewTripModalController handleClose={handleClose} />
         </>
       </Modal>
     </NewTripProvider>

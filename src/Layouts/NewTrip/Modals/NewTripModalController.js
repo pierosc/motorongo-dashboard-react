@@ -36,7 +36,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function NewTripModalController() {
+function NewTripModalController({ handleClose }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -61,7 +61,7 @@ function NewTripModalController() {
           <CalculatePrice setValue={setValue} />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <CreateTrip setValue={setValue} />
+          <CreateTrip setValue={setValue} handleClose={handleClose} />
         </TabPanel>
       </SwipeableViews>
     </Box>
