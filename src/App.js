@@ -29,10 +29,11 @@ function App() {
           </IconButton>
         </div>
         <div className="flex justify-center">
-          <div style={{ width: "900px", maxWidth: "90vw" }}>
+          <div style={{ width: "1200px", maxWidth: "90vw" }}>
             <Outlet />
           </div>
         </div>
+        v 0.0.1
       </div>
       <div style={{ display: "flex", height: "100%", minHeight: "400px" }}>
         <Sidebar

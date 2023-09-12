@@ -28,6 +28,8 @@ function TripDisplay({
       driver: driver?.pk,
     },
     (data) => {
+      setDriver({});
+      setTripState({});
       getTripList();
       console.log(data);
     }
@@ -42,7 +44,10 @@ function TripDisplay({
       driver: driver?.pk,
     },
     (data) => {
+      setDriver({});
+      setTripState({});
       getTripList();
+
       console.log(data);
     }
   );
@@ -50,7 +55,15 @@ function TripDisplay({
   useEffect(() => {
     if (tripSection === "Asigned") {
       setDriver(driversList.find((v) => v.pk === trip?.driver));
+      setTripState(tripStateList.find((v) => v.id == trip?.trip_state));
       console.log(driversList.find((v) => v.pk === trip?.driver));
+
+      console.log("-----");
+
+      console.log(tripStateList);
+      console.log(trip?.trip_state);
+      console.log(tripStateList.find((v) => v.id == trip?.trip_state));
+      console.log("-----");
     }
   }, []);
 
