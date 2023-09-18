@@ -11,9 +11,12 @@ function TripDisplay({
   tripStateList,
   tripSection,
   getTripList,
+  setIsEditingATrip,
+  isEditingATrip,
 }) {
   const [driver, setDriver] = useState({});
   const [tripState, setTripState] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   console.log(trip?.driver);
   console.log(driversList);
@@ -56,14 +59,14 @@ function TripDisplay({
     if (tripSection === "Asigned") {
       setDriver(driversList.find((v) => v.pk === trip?.driver));
       setTripState(tripStateList.find((v) => v.id == trip?.trip_state));
-      console.log(driversList.find((v) => v.pk === trip?.driver));
+      // console.log(driversList.find((v) => v.pk === trip?.driver));
 
-      console.log("-----");
+      // console.log("-----");
 
-      console.log(tripStateList);
-      console.log(trip?.trip_state);
-      console.log(tripStateList.find((v) => v.id == trip?.trip_state));
-      console.log("-----");
+      // console.log(tripStateList);
+      // console.log(trip?.trip_state);
+      // console.log(tripStateList.find((v) => v.id == trip?.trip_state));
+      // console.log("-----");
     }
   }, []);
 
@@ -114,16 +117,24 @@ function TripDisplay({
           mapKey={"pk"}
           selected={driver}
           setSelected={setDriver}
+          disabled={!editMode}
         />
 
         <Button
-          text="Guardar Cambios"
-          design={"success"}
+          text={!editMode ? "Editar" : "Guardar Cambios"}
+          design={isEditingATrip && !editMode ? "disabled" : "success"}
           onClick={() => {
-            if (tripSection === "Asigned") {
-              EditTrip();
-            } else {
-              AsignDriver();
+            setEditMode(!editMode);
+            setIsEditingATrip(!editMode);
+            // if(editMode){
+            //   isEditingATrip(false)
+            // }
+            if (editMode) {
+              if (tripSection === "Asigned") {
+                EditTrip();
+              } else {
+                AsignDriver();
+              }
             }
           }}
         />

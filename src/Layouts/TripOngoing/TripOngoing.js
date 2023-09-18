@@ -8,6 +8,7 @@ function TripOngoing({ section, tripList, setTripList }) {
   // const [tripList, setTripList] = useState([]);
   const [driversList, setDriversList] = useState([]);
   const [tripStateList, setTripStateList] = useState([]);
+  const [isEditingATrip, setIsEditingATrip] = useState(false);
 
   const [getTripList] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
@@ -52,6 +53,8 @@ function TripOngoing({ section, tripList, setTripList }) {
           tripStateList={tripStateList}
           tripSection={section}
           getTripList={getTripList}
+          setIsEditingATrip={setIsEditingATrip}
+          isEditingATrip={isEditingATrip}
         />
       ))}
     </div>
