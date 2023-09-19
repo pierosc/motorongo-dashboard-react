@@ -61,18 +61,18 @@ function TripEnded({ section }) {
         label: "Pasajero",
         id: "customer_full_name",
       },
-      {
-        label: "Pasajero Calificación",
-        id: "customer_stars",
-      },
+      // {
+      //   label: "Pasajero Calificación",
+      //   id: "customer_stars",
+      // },
       {
         label: "Conductor",
         id: "driver_full_name",
       },
-      {
-        label: "Conductor Calificación",
-        id: "driver_stars",
-      },
+      // {
+      //   label: "Conductor Calificación",
+      //   id: "driver_stars",
+      // },
       {
         label: "Origen",
         id: "origin_address",
@@ -89,10 +89,10 @@ function TripEnded({ section }) {
         label: "Ref Destino",
         id: "destination_ref",
       },
-      {
-        label: "Distancia",
-        id: "distance",
-      },
+      // {
+      //   label: "Distancia",
+      //   id: "distance",
+      // },
       {
         label: "Precio",
         id: "driverInitialAmount",

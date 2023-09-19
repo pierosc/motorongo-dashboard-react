@@ -15,17 +15,17 @@ function DropdownContainer({
 }) {
   const { show, dataFilter } = useContext(SelectFilterContext);
 
-  console.log(rect?.top);
-  console.log(rect?.height);
-  console.log(Number(dropdownContainer.maxHeight.split("px")[0]));
-  console.log("**");
-  console.log(
-    rect?.top +
-      rect?.height +
-      Number(dropdownContainer.maxHeight.split("px")[0])
-  );
-  console.log(window.innerHeight);
-  console.log("------------");
+  // console.log(rect?.top);
+  // console.log(rect?.height);
+  // console.log(Number(dropdownContainer.maxHeight.split("px")[0]));
+  // console.log("**");
+  // console.log(
+  //   rect?.top +
+  //     rect?.height +
+  //     Number(dropdownContainer.maxHeight.split("px")[0])
+  // );
+  // console.log(window.innerHeight);
+  // console.log("------------");
 
   const dropdownContainerStyle = {
     ...dropdownContainer,

@@ -33,9 +33,15 @@ function App() {
             <Outlet />
           </div>
         </div>
-        v 0.0.1
+        v 0.0.4
       </div>
-      <div style={{ display: "flex", height: "100%", minHeight: "400px" }}>
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          // , minHeight: "400px"
+        }}
+      >
         <Sidebar
           onBackdropClick={() => setToggled(false)}
           toggled={toggled}

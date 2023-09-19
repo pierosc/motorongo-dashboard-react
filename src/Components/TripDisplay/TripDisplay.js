@@ -18,9 +18,9 @@ function TripDisplay({
   const [tripState, setTripState] = useState({});
   const [editMode, setEditMode] = useState(false);
 
-  console.log(trip?.driver);
-  console.log(driversList);
-  console.log(driversList.find((v) => v.pk === trip?.driver));
+  // console.log(trip?.driver);
+  // console.log(driversList);
+  // console.log(driversList.find((v) => v.pk === trip?.driver));
 
   const [AsignDriver] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/update"}`,
@@ -68,7 +68,7 @@ function TripDisplay({
       // console.log(tripStateList.find((v) => v.id == trip?.trip_state));
       // console.log("-----");
     }
-  }, []);
+  }, [tripStateList, driversList]);
 
   const customerName = trip?.customer_full_name;
   const destination =
@@ -143,43 +143,43 @@ function TripDisplay({
   );
 }
 
-function PlaceInfo({ trip }) {
-  // const [customer, setCustomer] = useState({
-  //   first_name: "--",
-  //   last_name: "--",
-  // });
+// function PlaceInfo({ trip }) {
+//   // const [customer, setCustomer] = useState({
+//   //   first_name: "--",
+//   //   last_name: "--",
+//   // });
 
-  // const [getCustomerData] = usePostRequest(
-  //   `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,
-  //   setCustomer,
-  //   { customer_uuid: trip?.customer }
-  // );
+//   // const [getCustomerData] = usePostRequest(
+//   //   `${process.env.REACT_APP_TERA_URL + "api/trip/customer-name"}`,
+//   //   setCustomer,
+//   //   { customer_uuid: trip?.customer }
+//   // );
 
-  // useEffect(() => {
-  //   getCustomerData();
-  // }, []);
+//   // useEffect(() => {
+//   //   getCustomerData();
+//   // }, []);
 
-  const customerName = trip?.customer_full_name;
-  const destination =
-    trip?.destination_address?.split(",")[0] +
-    trip?.destination_address?.split(",")[1] +
-    "/" +
-    trip?.destination_ref;
-  const origin =
-    trip?.origin_address?.split(",")[0] +
-    trip?.origin_address?.split(",")[1] +
-    "/" +
-    trip?.origin_ref;
+//   const customerName = trip?.customer_full_name;
+//   const destination =
+//     trip?.destination_address?.split(",")[0] +
+//     trip?.destination_address?.split(",")[1] +
+//     "/" +
+//     trip?.destination_ref;
+//   const origin =
+//     trip?.origin_address?.split(",")[0] +
+//     trip?.origin_address?.split(",")[1] +
+//     "/" +
+//     trip?.origin_ref;
 
-  return (
-    <div className="grid ">
-      <div className="font-bold">{customerName}</div>
-      <div className="text-xs">Destino</div>
-      <div className="text-xs mb-2">{destination}</div>
-      <div className="text-xs">Origen</div>
-      <div className="text-xs">{origin}</div>
-    </div>
-  );
-}
+//   return (
+//     <div className="grid ">
+//       <div className="font-bold">{customerName}</div>
+//       <div className="text-xs">Destino</div>
+//       <div className="text-xs mb-2">{destination}</div>
+//       <div className="text-xs">Origen</div>
+//       <div className="text-xs">{origin}</div>
+//     </div>
+//   );
+// }
 
 export default TripDisplay;
