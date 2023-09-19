@@ -7,24 +7,25 @@ import Input from "../Input/Input";
 
 function TripDisplay({
   trip,
-  driversList,
   tripStateList,
   tripSection,
   getTripList,
   setIsEditingATrip,
   isEditingATrip,
 }) {
+  const [driversList, setDriversList] = useState([]);
   const [driver, setDriver] = useState({});
   const [tripState, setTripState] = useState({});
   const [editMode, setEditMode] = useState(false);
 
-  // console.log(trip?.driver);
-  // console.log(driversList);
-  // console.log(driversList.find((v) => v.pk === trip?.driver));
+  const [getDriversList] = usePostRequest(
+    `${process.env.REACT_APP_TERA_URL + "back-office/driver/list"}`,
+    setDriversList,
+    { driver_state: true, is_free: true }
+  );
 
   const [AsignDriver] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/update"}`,
-    // setDriversList,
     {
       trip_uuid: trip?.uuid,
       trip_state: "2",
@@ -40,7 +41,6 @@ function TripDisplay({
 
   const [EditTrip] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/update"}`,
-    // setDriversList,
     {
       trip_uuid: trip?.uuid,
       trip_state: tripState?.id,
@@ -50,25 +50,24 @@ function TripDisplay({
       setDriver({});
       setTripState({});
       getTripList();
-
       console.log(data);
     }
   );
 
   useEffect(() => {
+    if (editMode) {
+      getDriversList();
+    } else {
+      setDriversList([]);
+    }
+  }, [editMode]);
+
+  useEffect(() => {
     if (tripSection === "Asigned") {
       setDriver(driversList.find((v) => v.pk === trip?.driver));
       setTripState(tripStateList.find((v) => v.id == trip?.trip_state));
-      // console.log(driversList.find((v) => v.pk === trip?.driver));
-
-      // console.log("-----");
-
-      // console.log(tripStateList);
-      // console.log(trip?.trip_state);
-      // console.log(tripStateList.find((v) => v.id == trip?.trip_state));
-      // console.log("-----");
     }
-  }, [tripStateList, driversList]);
+  }, []);
 
   const customerName = trip?.customer_full_name;
   const destination =
@@ -78,12 +77,17 @@ function TripDisplay({
   // trip?.destination_ref;
   const origin =
     trip?.origin_address?.split(",")[0] + trip?.origin_address?.split(",")[1];
-
+  const CreationDate = trip?.created_at.split("T")[0];
+  const CreationHour = trip?.created_at.split("T")[1].split(".")[0];
   return (
     <Paper elevation={3}>
       <div className="grid grid-cols-6 m-4 gap-6 p-4 items-center">
         {/* <PlaceInfo trip={trip} /> */}
-        <div className="font-bold">{customerName}</div>
+        <div className="grid">
+          <div className="font-bold">{customerName}</div>
+          <div className="text-xs">{CreationDate}</div>
+          <div className="text-xs">{CreationHour}</div>
+        </div>
         <div className="grid">
           <div className="text-xs font-bold">Destino</div>
           <div className="text-xs mb-2">{destination}</div>
@@ -110,7 +114,15 @@ function TripDisplay({
 
         {/* //Elegir conductor */}
         <SelectFilter
-          data={driversList}
+          data={driversList.map((objeto) => {
+            const { model, pk, fields } = objeto;
+            console.log(objeto);
+            return {
+              model: model,
+              pk: pk,
+              ...fields, // Spread de todas las propiedades dentro de "fields"
+            };
+          })}
           label={"Elegir conductor"}
           style={"big"}
           option={"first_name"}
@@ -138,6 +150,16 @@ function TripDisplay({
             }
           }}
         />
+        {editMode && (
+          <Button
+            text={"Cancelar"}
+            design={"cancel"}
+            onClick={() => {
+              setEditMode(false);
+              setIsEditingATrip(false);
+            }}
+          />
+        )}
       </div>
     </Paper>
   );

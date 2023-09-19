@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import TripDisplay from "../../Components/TripDisplay/TripDisplay";
 import useGettRequest from "../../Hooks/useGetRequest";
 import usePostRequest from "../../Hooks/usePostRequest";
+import Input from "../../Components/Input/Input";
+import Button from "../../Components/Button/Button";
+import debounce from "lodash.debounce";
 
 function TripOngoing({ section, tripList, setTripList }) {
-  // const [tripList, setTripList] = useState([]);
-  const [driversList, setDriversList] = useState([]);
   const [tripStateList, setTripStateList] = useState([]);
   const [isEditingATrip, setIsEditingATrip] = useState(false);
 
@@ -18,12 +19,6 @@ function TripOngoing({ section, tripList, setTripList }) {
     }
   );
 
-  const [getDriversList] = usePostRequest(
-    `${process.env.REACT_APP_TERA_URL + "back-office/driver/list"}`,
-    setDriversList,
-    { driver_state: true }
-  );
-
   const [getTripStateList] = useGettRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip-state/list"}`,
     setTripStateList
@@ -31,25 +26,65 @@ function TripOngoing({ section, tripList, setTripList }) {
 
   useEffect(() => {
     getTripList();
-    getDriversList();
     getTripStateList();
   }, []);
 
+  useEffect(() => {
+    const intervalId = setTimeout(function runFunction() {
+      getTripList();
+      setTimeout(runFunction, 120000);
+    }, 120000); // Intervalo de 2 minutos en milisegundos
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") {
+        console.log("La pestaña se ha vuelto activa");
+        getTripList();
+      }
+    });
+
+    return () => {
+      document.removeEventListener("visibilitychange", () => {});
+    };
+  }, []);
+
+  const TripSearch = debounce((data) => {
+    getTripList({
+      trip_state: section === "NoAsigned" ? [1] : [2, 3, 4, 5, 8], //Ongoing
+      search_query: data,
+      days_before: 100,
+    });
+  }, 200);
+
   return (
     <div style={{ height: "70vh", overflow: "auto" }}>
+      <div className="grid lg:grid-cols-5 gap-4">
+        <div className="col-span-4">
+          <Input
+            label="Buscar Viaje por..."
+            onChange={(e) => {
+              TripSearch(e.target.value);
+            }}
+          />
+        </div>
+
+        <Button
+          text={"Actualizar"}
+          design={"success"}
+          onClick={() => {
+            getTripList();
+          }}
+        />
+      </div>
+
       {tripList.map((trip, index) => (
         <TripDisplay
           trip={trip}
-          // driversList={driversList?.map((driver) => [driver.fields])}
-          driversList={driversList.map((objeto) => {
-            const { model, pk, fields } = objeto;
-            console.log(objeto);
-            return {
-              model: model,
-              pk: pk,
-              ...fields, // Spread de todas las propiedades dentro de "fields"
-            };
-          })}
           tripStateList={tripStateList}
           tripSection={section}
           getTripList={getTripList}
