@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { color } from "./Utils/Colors";
+import logo from "./assets/tera_logoblanco.png";
 
 function App() {
   const [toggled, setToggled] = React.useState(false);
@@ -31,6 +32,12 @@ function App() {
           >
             <MenuIcon />
           </IconButton>
+          <div
+            // style={{ maxHeight: "20px", height: "20px" }}
+            className="flex items-center"
+          >
+            <img src={logo} style={{ objectFit: "contain", height: "20px" }} />
+          </div>
         </div>
         <div className="flex justify-center">
           <div style={{ width: "1200px", maxWidth: "90vw" }}>

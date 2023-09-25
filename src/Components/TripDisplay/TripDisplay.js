@@ -4,6 +4,11 @@ import SelectFilter from "../SelectFilter/SelectFilter";
 import Button from "../Button/Button";
 import usePostRequest from "../../Hooks/usePostRequest";
 import Input from "../Input/Input";
+import EditIcon from "@mui/icons-material/Edit";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 function TripDisplay({
   trip,
@@ -131,35 +136,60 @@ function TripDisplay({
           setSelected={setDriver}
           disabled={!editMode}
         />
+        <div className="grid grid-cols-3 gap-2">
+          <Tooltip title="Editar">
+            <IconButton
+              onClick={() => {
+                setEditMode(!editMode);
+                setIsEditingATrip(!editMode);
+                if (editMode) {
+                  if (tripSection === "Asigned") {
+                    EditTrip();
+                  } else {
+                    AsignDriver();
+                  }
+                }
+              }}
+              // sx={{ color: "white" }}
+              disabled={isEditingATrip && !editMode}
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Guardar">
+            <IconButton
+              onClick={() => {
+                setEditMode(!editMode);
+                setIsEditingATrip(!editMode);
+                if (editMode) {
+                  if (tripSection === "Asigned") {
+                    EditTrip();
+                  } else {
+                    AsignDriver();
+                  }
+                }
+              }}
+              // sx={{ color: "white" }}
+              disabled={isEditingATrip && !editMode}
+            >
+              <CheckCircleIcon />
+            </IconButton>
+          </Tooltip>
 
-        <Button
-          text={!editMode ? "Editar" : "Guardar Cambios"}
-          design={isEditingATrip && !editMode ? "disabled" : "success"}
-          onClick={() => {
-            setEditMode(!editMode);
-            setIsEditingATrip(!editMode);
-            // if(editMode){
-            //   isEditingATrip(false)
-            // }
-            if (editMode) {
-              if (tripSection === "Asigned") {
-                EditTrip();
-              } else {
-                AsignDriver();
-              }
-            }
-          }}
-        />
-        {editMode && (
-          <Button
-            text={"Cancelar"}
-            design={"cancel"}
-            onClick={() => {
-              setEditMode(false);
-              setIsEditingATrip(false);
-            }}
-          />
-        )}
+          <Tooltip title="Cancelar">
+            <IconButton
+              disabled={!editMode}
+              onClick={() => {
+                setEditMode(false);
+                setIsEditingATrip(false);
+              }}
+              // sx={{ color: "white" }}
+              // disabled={isEditingATrip && !editMode}
+            >
+              <CancelIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
     </Paper>
   );
