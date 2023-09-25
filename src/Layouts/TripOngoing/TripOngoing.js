@@ -10,6 +10,7 @@ import debounce from "lodash.debounce";
 function TripOngoing({ section, tripList, setTripList }) {
   const [tripStateList, setTripStateList] = useState([]);
   const [isEditingATrip, setIsEditingATrip] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const [getTripList] = usePostRequest(
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
@@ -40,18 +41,18 @@ function TripOngoing({ section, tripList, setTripList }) {
     };
   }, []);
 
-  useEffect(() => {
-    document.addEventListener("visibilitychange", function () {
-      if (document.visibilityState === "visible") {
-        console.log("La pestaña se ha vuelto activa");
-        getTripList();
-      }
-    });
+  // useEffect(() => {
+  //   document.addEventListener("visibilitychange", function () {
+  //     if (document.visibilityState === "visible") {
+  //       console.log("La pestaña se ha vuelto activa");
+  //       getTripList();
+  //     }
+  //   });
 
-    return () => {
-      document.removeEventListener("visibilitychange", () => {});
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("visibilitychange", () => {});
+  //   };
+  // }, []);
 
   const TripSearch = debounce((data) => {
     getTripList({
@@ -67,7 +68,9 @@ function TripOngoing({ section, tripList, setTripList }) {
         <div className="col-span-4">
           <Input
             label="Buscar Viaje por..."
+            value={searchText}
             onChange={(e) => {
+              setSearchText(e.target.value);
               TripSearch(e.target.value);
             }}
           />

@@ -5,6 +5,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import "./Button.css";
+import { color } from "../../Utils/Colors";
 
 function Button({ text, design, onClick, className, icono, start = "" }) {
   const [loadingButton, setloadingButton] = useState(false);
@@ -33,7 +34,8 @@ function Button({ text, design, onClick, className, icono, start = "" }) {
       <div className={`justify-end`}>
         {design === "success" && (
           <button
-            className="flex w-full items-center justify-center py-2 px-4 button_text button_color text-center text-white rounded-lg  focus:outline-none h-10 gap-1"
+            className="flex w-full items-center justify-center py-2 px-4 button_text text-center text-white rounded-lg  focus:outline-none h-10 gap-1"
+            style={{ backgroundColor: color.blue }}
             onClick={onClick}
           >
             {text.toUpperCase()}

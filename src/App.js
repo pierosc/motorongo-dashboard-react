@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { color } from "./Utils/Colors";
 
 function App() {
   const [toggled, setToggled] = React.useState(false);
@@ -20,7 +21,10 @@ function App() {
         </IconButton>
       </div> */}
       <div className="flex flex-col ">
-        <div className="flex justify-start" style={{ backgroundColor: "grey" }}>
+        <div
+          className="flex justify-start"
+          style={{ backgroundColor: color.green }}
+        >
           <IconButton
             onClick={() => setToggled(!toggled)}
             sx={{ color: "white" }}
