@@ -13,7 +13,7 @@ function NewTrip({ setTripList }) {
   return (
     <NewTripProvider>
       <div className="flex justify-between my-8 items-center">
-        <label className="text-2xl">VIAJA EN MOTOCAR</label>
+        <label className="text-3xl font-extrabold">VIAJA EN MOTOCAR</label>
         <Button text="Nuevo viaje" design={"success"} onClick={handleOpen} />
       </div>
       <Modal open={open}>

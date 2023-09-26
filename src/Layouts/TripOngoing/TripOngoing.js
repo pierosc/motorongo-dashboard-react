@@ -64,10 +64,11 @@ function TripOngoing({ section, tripList, setTripList }) {
 
   return (
     <div style={{ height: "70vh", overflow: "auto" }}>
-      <div className="grid lg:grid-cols-5 gap-4">
+      <div className="grid lg:grid-cols-5 gap-4 items-end mb-4">
         <div className="col-span-4">
           <Input
             label="Buscar Viaje por..."
+            placeholder="Origen, Destino, Referencias, Nombre o DNI de pasajero o conductor..."
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);

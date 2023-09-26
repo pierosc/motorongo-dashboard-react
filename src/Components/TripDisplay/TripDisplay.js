@@ -9,6 +9,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import { color } from "../../Utils/Colors";
 
 function TripDisplay({
   trip,
@@ -139,6 +140,7 @@ function TripDisplay({
         <div className="grid grid-cols-3 gap-2">
           <Tooltip title="Editar">
             <IconButton
+              sx={{ color: color.green }}
               onClick={() => {
                 setEditMode(!editMode);
                 setIsEditingATrip(!editMode);
@@ -151,13 +153,14 @@ function TripDisplay({
                 }
               }}
               // sx={{ color: "white" }}
-              disabled={isEditingATrip && !editMode}
+              disabled={isEditingATrip}
             >
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Guardar">
             <IconButton
+              sx={{ color: color.yellow }}
               onClick={() => {
                 setEditMode(!editMode);
                 setIsEditingATrip(!editMode);
@@ -170,7 +173,7 @@ function TripDisplay({
                 }
               }}
               // sx={{ color: "white" }}
-              disabled={isEditingATrip && !editMode}
+              disabled={!editMode}
             >
               <CheckCircleIcon />
             </IconButton>
@@ -178,6 +181,7 @@ function TripDisplay({
 
           <Tooltip title="Cancelar">
             <IconButton
+              sx={{ color: color.red }}
               disabled={!editMode}
               onClick={() => {
                 setEditMode(false);

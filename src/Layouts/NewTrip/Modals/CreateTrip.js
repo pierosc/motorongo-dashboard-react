@@ -118,6 +118,13 @@ function CreateTrip({ setValue, handleClose, setTripList }) {
           setSelected={setDriver}
         /> */}
         <Button
+          text="Cancelar"
+          design={"cancel"}
+          onClick={() => {
+            handleClose();
+          }}
+        />
+        <Button
           text="Crear viaje"
           design={"success"}
           onClick={() => {

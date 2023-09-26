@@ -7,7 +7,7 @@ import NewTripContext from "../NewTripContext";
 import usePostRequest from "../../../Hooks/usePostRequest";
 import debounce from "lodash.debounce";
 
-function SelectClient({ setValue }) {
+function SelectClient({ setValue, handleClose }) {
   const { clientList, setClientList, client, setClient } =
     useContext(NewTripContext);
 
@@ -52,6 +52,13 @@ function SelectClient({ setValue }) {
         />
       </div>
       <div className="grid grid-cols-2 gap-2">
+        <Button
+          text="Cancelar"
+          design={"cancel"}
+          onClick={() => {
+            handleClose();
+          }}
+        />
         <Button
           text="Continuar"
           design={Object.keys(client)?.length != 0 ? "success" : "disabled"}

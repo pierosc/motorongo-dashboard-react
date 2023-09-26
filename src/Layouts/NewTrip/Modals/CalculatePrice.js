@@ -8,7 +8,7 @@ import NewTripContext from "../NewTripContext";
 import debounce from "lodash.debounce";
 import usePostRequest from "../../../Hooks/usePostRequest";
 
-function CalculatePrice({ setValue }) {
+function CalculatePrice({ setValue, handleClose }) {
   const {
     client,
     price,
@@ -182,6 +182,13 @@ function CalculatePrice({ setValue }) {
         </div>
         <Input label="Precio" value={price?.price} style={"disabled"} />
         <div className="grid grid-cols-2 gap-2">
+          <Button
+            text="Cancelar"
+            design={"cancel"}
+            onClick={() => {
+              handleClose();
+            }}
+          />
           <Button
             text="Continuar"
             design={isPriceCalculated ? "success" : "disabled"}

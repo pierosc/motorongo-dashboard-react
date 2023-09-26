@@ -6,7 +6,7 @@ import NewTripContext from "../NewTripContext";
 import Input from "../../../Components/Input/Input";
 import usePostRequest from "../../../Hooks/usePostRequest";
 
-function NewClient({ setValue }) {
+function NewClient({ setValue, handleClose }) {
   const { setClient } = useContext(NewTripContext);
   const [customerName, setCustomerName] = useState("");
   const [customerLastName, setCustomerLastName] = useState("");
@@ -92,6 +92,13 @@ function NewClient({ setValue }) {
           validationType="numeric"
         />
       </div>
+      <Button
+        text="Cancelar"
+        design={"cancel"}
+        onClick={() => {
+          handleClose();
+        }}
+      />
       <Button
         text="Continuar"
         design={"success"}

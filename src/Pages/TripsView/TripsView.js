@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TripOngoing from "../../Layouts/TripOngoing/TripOngoing";
 import TripEnded from "../../Layouts/TripEnded/TripEnded";
+import { color } from "../../Utils/Colors";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
