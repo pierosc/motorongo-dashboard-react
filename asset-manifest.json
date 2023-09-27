@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/motorongo-dashboard-react/static/css/main.02efffc3.css",
-    "main.js": "/motorongo-dashboard-react/static/js/main.8df798b4.js",
+    "main.js": "/motorongo-dashboard-react/static/js/main.ec495c0b.js",
     "static/js/787.b8968bcc.chunk.js": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js",
     "static/media/BG.jpg": "/motorongo-dashboard-react/static/media/BG.bddc734b75feea837952.jpg",
     "index.html": "/motorongo-dashboard-react/index.html",
     "main.02efffc3.css.map": "/motorongo-dashboard-react/static/css/main.02efffc3.css.map",
-    "main.8df798b4.js.map": "/motorongo-dashboard-react/static/js/main.8df798b4.js.map",
+    "main.ec495c0b.js.map": "/motorongo-dashboard-react/static/js/main.ec495c0b.js.map",
     "787.b8968bcc.chunk.js.map": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02efffc3.css",
-    "static/js/main.8df798b4.js"
+    "static/js/main.ec495c0b.js"
   ]
 }
