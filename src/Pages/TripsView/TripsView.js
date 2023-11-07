@@ -67,8 +67,9 @@ function TripsView() {
           <TabList onChange={handleChange}>
             <Tab label="Viajes No Asignados" {...a11yProps(0)} />
             <Tab label="Viajes Asignados" {...a11yProps(1)} />
-            <Tab label="Completados" {...a11yProps(2)} />
-            <Tab label="Cancelados" {...a11yProps(3)} />
+            <Tab label="Viajes Reservados" {...a11yProps(2)} />
+            <Tab label="Completados" {...a11yProps(3)} />
+            <Tab label="Cancelados" {...a11yProps(4)} />
           </TabList>
         </Box>
         <SwipeableViews
@@ -91,9 +92,16 @@ function TripsView() {
             />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <TripEnded section={"Completed"} />
+            <TripOngoing
+              section={"Reserved"}
+              tripList={tripList}
+              setTripList={setTripList}
+            />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
+            <TripEnded section={"Completed"} />
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
             <TripEnded section={"Canceled"} />
           </TabPanel>
         </SwipeableViews>

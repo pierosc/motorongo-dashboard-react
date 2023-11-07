@@ -16,7 +16,12 @@ function TripOngoing({ section, tripList, setTripList }) {
     `${process.env.REACT_APP_TERA_URL + "back-office/trip/list-web"}`,
     setTripList,
     {
-      trip_state: section === "NoAsigned" ? [1] : [2, 3, 4, 5, 8], //Ongoing
+      trip_state:
+        section === "NoAsigned"
+          ? [1]
+          : section === "Reserved"
+          ? [9]
+          : [2, 3, 4, 5, 8], //Ongoing
     }
   );
 
@@ -56,7 +61,12 @@ function TripOngoing({ section, tripList, setTripList }) {
 
   const TripSearch = debounce((data) => {
     getTripList({
-      trip_state: section === "NoAsigned" ? [1] : [2, 3, 4, 5, 8], //Ongoing
+      trip_state:
+        section === "NoAsigned"
+          ? [1]
+          : section === "Reserved"
+          ? [9]
+          : [2, 3, 4, 5, 8], //Ongoing
       search_query: data,
       days_before: 100,
     });

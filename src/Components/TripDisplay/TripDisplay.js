@@ -85,14 +85,28 @@ function TripDisplay({
     trip?.origin_address?.split(",")[0] + trip?.origin_address?.split(",")[1];
   const CreationDate = trip?.created_at.split("T")[0];
   const CreationHour = trip?.created_at.split("T")[1].split(".")[0];
+  const ReservationDate = trip?.booked_datetime.split("T")[0];
+  const ReservationHour = trip?.booked_datetime.split("T")[1].split(".")[0];
+  console.log(
+    "-----------------------------------------------------------------------"
+  );
+  console.log(trip);
+  console.log(
+    "-----------------------------------------------------------------------"
+  );
+
   return (
     <Paper elevation={3}>
       <div className="grid grid-cols-6 m-4 gap-6 p-4 items-center">
         {/* <PlaceInfo trip={trip} /> */}
         <div className="grid">
           <div className="font-bold">{customerName}</div>
-          <div className="text-xs">{CreationDate}</div>
-          <div className="text-xs">{CreationHour}</div>
+          <div className="text-xs">
+            {trip?.trip_state == "9" ? ReservationDate : CreationDate}
+          </div>
+          <div className="text-xs">
+            {trip?.trip_state == "9" ? ReservationHour : CreationHour}
+          </div>
         </div>
         <div className="grid">
           <div className="text-xs font-bold">Destino</div>
