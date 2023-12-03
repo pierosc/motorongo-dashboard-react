@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/motorongo-dashboard-react/static/css/main.02efffc3.css",
-    "main.js": "/motorongo-dashboard-react/static/js/main.054420bc.js",
-    "static/js/787.b8968bcc.chunk.js": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js",
-    "static/media/BG.jpg": "/motorongo-dashboard-react/static/media/BG.bddc734b75feea837952.jpg",
-    "index.html": "/motorongo-dashboard-react/index.html",
-    "main.02efffc3.css.map": "/motorongo-dashboard-react/static/css/main.02efffc3.css.map",
-    "main.054420bc.js.map": "/motorongo-dashboard-react/static/js/main.054420bc.js.map",
-    "787.b8968bcc.chunk.js.map": "/motorongo-dashboard-react/static/js/787.b8968bcc.chunk.js.map"
+    "main.css": "/mineria-shiny/static/css/main.a3a2a7e2.css",
+    "main.js": "/mineria-shiny/static/js/main.ddd81d74.js",
+    "static/js/787.4385056d.chunk.js": "/mineria-shiny/static/js/787.4385056d.chunk.js",
+    "index.html": "/mineria-shiny/index.html",
+    "main.a3a2a7e2.css.map": "/mineria-shiny/static/css/main.a3a2a7e2.css.map",
+    "main.ddd81d74.js.map": "/mineria-shiny/static/js/main.ddd81d74.js.map",
+    "787.4385056d.chunk.js.map": "/mineria-shiny/static/js/787.4385056d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.02efffc3.css",
-    "static/js/main.054420bc.js"
+    "static/css/main.a3a2a7e2.css",
+    "static/js/main.ddd81d74.js"
   ]
 }
